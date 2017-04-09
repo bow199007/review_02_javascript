@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<p>问题1：当我鼠标点击的时候，请返回当前鼠标位置的坐标信息</p>
+	<p><b>注释：</b>注意，该坐标不考虑文档的滚动。如果事件发生在窗口的顶部，无论文档滚了多远，clientY 的值都是 0。但是，2 级 DOM 没有提供把窗口坐标转换为文档坐标的标准方法。在 IE 以外的浏览器，使用 window.pageXOffset 和 window.pageYOffset 即可。</p>
+	<p>问题2：下面代码执行将会返回什么结果</p>
+	<pre>
+	for(i=0;i<5;i++){
+		setTimeout(function(){
+			console.log(new Date(),i)
+		},1000)
+	};
+	console.log(new Date(),i);
+	</pre>
+	
+	<p>问题3：每秒写入一段文字</p>
+	<div id="write"></div>
+	
+	<p>问题4：逐字写入</p>
+	<div id="writeT"></div>
+	
+	
+	
+<script type="text/javascript">
+	init();
+	function init(){
+		client();
+		setInterval(msg(),1000)
+	}
+	
+	
+	//问题1：
+	function client(){
+		document.onclick = function(ev){
+			var oEvent = ev||event;
+			alert("X："+oEvent.clientX+"；Y："+oEvent.clientY);
+		};
+		
+	}
+	//问题2：
+	for(i=0;i<5;i++){
+		setTimeout(function(){
+			console.log(new Date(),i)
+		},1000)
+	};
+	console.log(new Date(),i);
+	
+	//问题3：??待解决，只能执行一次，没有重复执行
+	function write(){
+		var writeIn = document.getElementById("write");
+		writeIn.innerHTML += "<p>我会一秒钟重复写入一次</p>";
+		//document.write("<p>我会一秒钟重复写入一次</p>");
+		//用document.write()会将页面上现有的内容清空再每秒执行一次
+	}
+	setInterval(write,1000)
+	
+	
+	//问题4：substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+	//stringObject.substring(start,stop)
+	
+	
+	
+	function msg(){
+		var writeT = document.getElementById("writeT")
+		var str = "这是要逐字写入的文字";
+		var i=0;
+		if(i<str.length){
+			console.log(str.charAt(i))
+			writeT.innerHTML = str.charAt(i);
+		}else{
+			
+		}
+		
+		
+		
+	}
+	
+	
+	
+</script>
+</body>
+</html>

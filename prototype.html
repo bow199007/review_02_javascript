@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script type="text/javascript">
+	inti();
+	function inti(){
+		var newBike = new bike();
+		newBike.color = "white";
+		newBike.pinpai = "凤凰";
+		alert('我有一辆'+newBike.color+"的"+newBike.pinpai+"自行车");
+		newBike.qidong();
+		//新增方法stop
+		bike.prototype.stop = function(){
+			alert("我停止了");
+		}
+		newBike.stop();
+		
+		var aBeef = new beef();
+		aBeef.poison();
+	}
+	
+	function bike(color,pinpai){
+		//属性
+		this.color = color;
+		this.pinpai = pinpai;
+		//方法
+		this.qidong = function(){
+			alert("我启动了")
+		}
+	}
+	
+	function beef(weight,pinpai){
+		this.weight = weight;
+		this.pinpai = pinpai;
+		
+		this.poison = function(flag){
+			this.isPoison = flag;
+		}
+	}
+</script>

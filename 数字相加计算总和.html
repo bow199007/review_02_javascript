@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+</head>
+<body>
+	<p>计算从0-20所有数字相加的总和</p>
+	<script type="text/javascript">
+		init();
+		function init(){
+			console.log(total(20));
+		}
+		
+		function total(num){
+			var addNum = 0;
+			for(i=0;i<num;i++){
+				addNum += i;
+			}
+			return addNum;
+		}
+	</script>
+	
+</body>
+</html>

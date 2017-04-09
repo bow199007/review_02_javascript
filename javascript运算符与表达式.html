@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运算符和表达式</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    init();
+
+    /**
+     * （1）Infinity，什么时候出现无线大，除数为0
+     * （2）isFinite(num)，判断是否在一个有效范围内
+     * （3）eval
+     *      （1）json字符串转换为json对象
+     *      （2）eval运行函数
+     *      （3）执行表达式
+     */
+
+    function init() {
+        //xx();
+        // 1.执行函数
+        eval("xx()");
+        // 2.执行表达式
+        console.log(eval(1 * 2));
+        // 3.执行json
+        var jsonStr = "{'name':'phf'}";
+        var jsonObj = eval('(' + jsonStr + ')');
+        console.log(typeof jsonStr);
+        console.log(jsonObj);
+        console.log(typeof jsonObj);
+
+        // 时间与毫秒数切换
+        NumberParamDate();
+    }
+
+    function xx() {
+        console.log("hello,xx");
+    }
+
+    function learnisFinite() {
+        var xx = {"age": 1, "name": "name"};
+        console.log(isFinite(10));//true
+        console.log(isFinite({'age': "a"}));//false
+        console.log(isFinite(xx.age));//true
+        console.log(isFinite(xx.name));//false
+        console.log(isFinite(true));//true
+        console.log(isFinite(new Date()));//true
+        console.log(isFinite("cc"));//false
+    }
+
+    function NumberParamDate() {
+        var currentDate = new Date();
+        console.log(currentDate);
+        //当前时间 转换成 毫秒数
+        var millisecond = Number(currentDate);
+        console.log(millisecond);
+        //毫秒数 转换成 当前时间
+        var unixTimestamp = new Date(millisecond);
+
+        console.log(unixTimestamp.toLocaleString());
+        console.log(unixTimestamp.toLocaleDateString());
+        console.log(unixTimestamp.toTimeString());
+    }
+
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<style>
+	*{margin:0;padding:0;}
+	#dl{font-size:18px;line-height:28px;}
+	#dl dd label{display:inline-block;width:150px;text-align:right;margin:10px 0;}
+	#dl dd input{width:150px;padding:0 5px;height:26px;line-height:26px;font-size:14px;vertical-align:middle;}
+	#dl .clickCount{width:100px;background:#0479f7;border:0;height:30px;line-height:30px;color:#fff;}
+</style>
+</head>
+<body>
+	<dl id="dl">
+		<dd><label>累计到：</label><input type="text" value="" placeholder="请输入你要累计的数值" id="number"/></dd>
+		<dd><label>累计总和为：</label><input type="text" value="" id="countTotal" disabled="disabled" /></dd>
+		<dd><label>&nbsp;</label><input type="button" value="计算总和" name="" class="clickCount"/></dd>
+	</dl>
+	
+	
+<script src="jquery-3.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$('.clickCount').click(function(){
+		var myNum = $('#number');
+		var countTotalInput = $('#countTotal');
+		var myNumVal = myNum.val();
+		if(myNumVal != '' && !isNaN(myNumVal)){
+			var myWriteVal = parseFloat(myNumVal);
+			//console.log(myNumVal);
+			//console.log(typeof myNumVal);  //string
+			//console.log(countTotal(myNumVal)) //010101010101010101010
+			if(myWriteVal>=0){
+				countTotalInput.val(countTotal(myWriteVal));
+			}else{
+				alert('负数')
+			}
+		}else{
+			alert("您输入的数字有误，请重新输入")
+		}
+	});
+	function countTotal(num){
+		var addNum = 0;
+		for(var i=0;i<num+1;i++){
+			addNum += i;
+		}
+		return addNum;
+	}
+	
+</script>
+</body>
+</html>

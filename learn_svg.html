@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>复习html5 svg</title>
+	</head>
+	
+	<body>
+
+		<svg width="140" height="170">
+			<title>猫咪</title>
+			<desc>使用svg画了一个猫咪</desc>
+			<!--脸 
+				cx：center x 中心点x轴距离，距离左边框
+				cy：center y 中心点y轴距离，距离上边框
+				r：半径
+				stroke：边框颜色
+				fill：填充的颜色
+			-->
+			<circle cx="70" cy="95" r="50" style="stroke: red; fill: none;" />
+			<circle cx="55" cy="80" r="5" style="stroke: black; fill: #339933" />
+			<circle cx="85" cy="80" r="5" style="stroke: black; fill: #339933" />
+			
+			<g id="whiskers">
+				<link x1="75" y1="95" x2="135" y2="85" style="stroke: black;" />
+				<link x1="75" y1="95" x2="135" y2="105" style="stroke: black;" />
+			</g>
+			<use xlink:href="#whiskers" transform="scale(-1,1) translate(-140,0)" />
+			
+			<!-- 耳朵 -->
+			<polyline points="108 62, 90 10,70 45, 50 10, 32 62" style="stroke: black; fill: none;" />
+			<!-- 嘴 -->
+			<polyline points="35 110, 45 120, 95 120, 105 110" style="stroke: black; fill: none;" />
+			<!-- 鼻子 -->
+			<path d="M 75 90 L 65 90 A 5 10 0 0 0 75 90" style="stroke: black; fill: #ffcccc;" />
+			<text x="60" y="165" style="font-family:sans-serif; font-size:14pt;">Cat</text>
+		</svg>
+	</body>
+
+</html>
