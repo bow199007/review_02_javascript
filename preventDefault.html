@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习event.preventDefault</title>
+</head>
+<body>
+    <p>只有当用户输入字母 ‘h’ 时，才会在输入框显现</p>
+    <input id="inputId" onkeypress="checkInput(event)">
+
+<br>
+
+<table>
+    <tr>
+        <td>
+            手机号码
+        </td>
+        <td>
+            <input type="text" id="phoneNum" onkeypress="checkValid(event)">
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
+
+<script type="application/javascript">
+
+    /**
+     * 参考链接：http://javascript.ruanyifeng.com/dom/event.html#toc17
+     * 学习点：
+     * （1）preventDefault方法取消浏览器对当前事件的默认行为
+     *
+     */
+
+    function checkInput(e) {
+        var eventKey = e.key;
+        console.log("用户输入的字符：" + eventKey);
+        if (eventKey != 'h') {
+            e.preventDefault();
+        }
+    }
+
+    function checkValid(e) {
+        var eventKey = e.key;
+        /**
+         * NaN的判断方法必须使用isNaN()这个内置函数
+         */
+        if (isNaN(parseInt(eventKey))) {
+            e.preventDefault();
+        }
+
+    }
+
+
+</script>

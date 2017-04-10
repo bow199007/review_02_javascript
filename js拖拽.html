@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #div1 {
+            width: 400px;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div2 {
+            width: 400px;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<p>请把 W3School 的图片拖放到矩形中：</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<br/>
+<br/>
+<br/>
+
+<div id="div2"></div>
+<br/>
+
+<img id="drag1" src="images/001.jpg" draggable="true" ondragstart="drag(event)"/>
+<img id="drag2" src="images/002.png"/>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+    (function foo() {
+        // y 创建于 foo 函数本地上下文之中
+        eval('var y = 20');
+    })();
+
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        e.dataTransfer.setData("eventTargetId", e.target.id);
+    }
+
+    function drop(e) {
+        e.preventDefault();
+        var data = e.dataTransfer.getData("eventTargetId");
+
+        e.target.appendChild(document.getElementById(data));
+
+        // 将图片2也追加到层1中
+        //e.target.appendChild(document.getElementById("drag2"));
+
+        // 将图片2也追加到层2中
+        document.getElementById("div2").appendChild(document.getElementById("drag2"));
+
+    }
+</script>
