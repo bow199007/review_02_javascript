@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zepto与jQuery异同</title>
+</head>
+<body>
+<!--事件触发-->
+<div class="insetJquery"></div>
+<div class="insetZepto"></div>
+<!--事件委托-->
+<a href="javascipt:void(0)" class="a">jquery事件委托，点击a链接，弹出a事件，增加类名b，未弹出b事件</a><br/>
+<a href="javascipt:void(0)" class="c">zepto事件委托，点击c链接，弹出c事件，增加类名d，弹出d事件</a>
+<!--width() height()-->
+<div id="oneBox" style="width: 200px;height: 200px;border:2px solid red;padding:10px;margin:10px;background:darkseagreen;"></div>
+<div id="twoBox" style="width: 200px;height: 200px;border:2px solid green;padding:10px;margin:10px;background:palevioletred;"></div>
+<!--offset()-->
+<div class="getOffset" style="position:relative;top:40px;left:50px;"></div>
+
+
+<script src="../jquery-3.2.0.min.js" type="text/javascript"></script>
+<script src="../zepto.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function($){
+    //DOM操作，jquery添加id不会生效
+    $(function(){
+       var inSet = $('<p>Jquery</p>',
+           {id : 'insetId'});
+       inSet.appendTo($('body'));
+    });
+    //事件触发，load不会执行
+    $(function(){
+        var carryOutLoad = $('<script/>',
+            {
+                src : '../swiper-3.4.2.jquery.min.js',
+                id : 'insetJqId'
+            });
+        //carryOutLoad.appendTo('.insetJquery');
+        carryOutLoad.on('load', function() {
+            console.log('jQ loaded');    //未打印
+        });
+    });
+    //事件委托
+    $(document).on('click','.a',function(){
+        alert('a事件');
+        $(this).removeClass('a').addClass('b');
+    });
+    $(document).on('click','.b',function(){
+        alert('b事件');
+    });
+    //width() height()的区别
+    var oneBox = $('#oneBox');
+    console.log(oneBox.width());    //200，不包含border，padding，margin
+    //offset()的区别
+    var getOffset = $('.getOffset');
+    console.log(getOffset.offset());    //top: 568, left: 58
+
+
+})(window.jQuery);
+
+
+Zepto(function($){
+    //DOM操作，zepto添加id生效
+    $(function(){
+        var inSet = $('<p>Zepto</p>',{id : 'insetId'});
+        inSet.appendTo($('body'));
+    });
+    //事件触发，load会执行
+    $(function(){
+        var carryOutLoad = $('<script/>',
+            {
+                src : '../zepto.min.js',
+                id : 'insetZeptoId'
+            });
+        carryOutLoad.appendTo('.insetZepto');
+        carryOutLoad.on('load', function() {
+            console.log('zepto loaded');
+        });
+    });
+    //事件委托
+    $(document).on('click','.c',function(){
+        alert('c事件');
+        $(this).removeClass('c').addClass('d');
+    });
+    $(document).on('click','.d',function(){
+        alert('d事件');
+    });
+    //width() height()
+    var twoBox = $('#twoBox');
+    console.log(twoBox.width());    //224，包含了width，border，padding，不包含margin
+    console.log(twoBox.css('width'));   //200px，带单位的宽度值，不包含border，padding，margin
+    //offset()的区别
+    var getOffset = $('.getOffset');
+    console.log(getOffset.offset());    //left: 58, top: 568, width: 1887, height: 0
+
+});
+</script>
+
+
+<!--
+7,Zepto无法获取隐藏元素宽高，jQuery 可以。
+
+　　8,Zepto中没有为原型定义extend方法而jQuery有。
+
+　　9,Zepto 的each 方法只能遍历 数组，不能遍历JSON对象。
+
+　　10,Zepto在操作dom的selected和checked属性时尽量使用prop方法，在读取属性值的情况下优先于attr。Zepto获取select元素的选中option不能用类似jQuery的方法$('option[selected]'),因为selected属性不是css的标准属性。应该使用$('option').not(function(){ return !this.selected })。
+
+　　10,Zepto不支持的选择器：
+-->
+</body>
+</html>
