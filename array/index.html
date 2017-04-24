@@ -45,4 +45,11 @@
     arr7[arr7.length] = 'f';
     console.log(arr7);    //['a','b','c','d','e','f']
 
+    //forEach 对象添加属性操作，数组迭代
+    var arr=[{a:1},{}];
+    arr.forEach(function(item,idx){
+        item.b=idx;
+    });
+    console.log(arr);
+
 </script>
