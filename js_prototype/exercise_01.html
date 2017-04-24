@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>原型练习01</title>
+</head>
+<body>
+<script type="text/javascript">
+    init();
+    function init(){
+        var newAddress = new Express();
+        console.log(newAddress.shoujian());
+
+    }
+
+    function Express(){
+        var recipients = "phf";
+        var address = "西湖区蒋村街道";
+        var products = new Array();
+
+        this.shoujian = function(){
+            return address;
+        }
+    }
+
+</script>
+
+</body>
+</html>

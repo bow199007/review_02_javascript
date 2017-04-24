@@ -29,7 +29,7 @@
 	init();
 	function init(){
 		client();
-		setInterval(msg(),1000)
+		//setInterval(msg(),1000)
 	}
 	
 	
@@ -52,7 +52,8 @@
 	//问题3：
 	function write(){
 		var writeIn = document.getElementById("write");
-		writeIn.innerHTML += "<p>我会一秒钟重复写入一次</p>";
+        writeIn.innerHTML += "<p>我会一秒钟重复写入一次</p>";
+
 		//document.write("<p>我会一秒钟重复写入一次</p>");
 		//用document.write()会将页面上现有的内容清空再每秒执行一次
 	}
@@ -61,22 +62,19 @@
 	
 	//问题4：substring() 方法用于提取字符串中介于两个指定下标之间的字符。
 	//stringObject.substring(start,stop)
-	
-	
-	
-	function msg(){
-		var writeT = document.getElementById("writeT")
-		var str = "这是要逐字写入的文字";
-		if(var i=0;i<str.length;i++){
-			console.log(str.charAt(i))
-			writeT.innerHTML = str.charAt(i);
-		}else{
-			
-		}
-		
-		
-		
-	}
+//	function msg(){
+//		var writeT = document.getElementById("writeT")
+//		var str = "这是要逐字写入的文字";
+//		if(var i=0;i<str.length;i++){
+//			console.log(str.charAt(i))
+//			writeT.innerHTML = str.charAt(i);
+//		}else{
+//
+//		}
+//
+//
+//
+//	}
 	
 	
 	

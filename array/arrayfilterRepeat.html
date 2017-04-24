@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    init();
+    function init() {
+        var arr1 = [1,2,3,4,2,4];
+        var arr2 = [1,2,'1',5,'a']
+        filterRepeat(arr1);
+        filterRepeat(arr2);
+    }
+
+    /**
+     * 定义一个函数
+     *
+     * @param arr 入参
+     * @returns {Array}  定义一个空的数组，并且返回该数组
+     */
+    function filterRepeat(arr) {
+        var newArr = [];
+        /**
+         * 循环遍历原数组
+         * 与新的数组中的值进行比较，如果不存在，则push进新的数组
+         * 这里要再定义一个函数，判断新值与数组比较，true还是false，见isExist()
+         */
+        for (var i = 0; i < arr.length; i++) {
+            //如果比较得出的值不是true，则执行
+            if (!isExist(arr[i], newArr)) {
+                newArr.push(arr[i]);
+            }
+        }
+        //console.log验证要写在return上面
+        console.log(newArr);
+        return newArr;
+    }
+
+    function isExist(val, arr) {
+        //如果相等，就表示有相同的值，返回true
+        for (var i = 0; i < arr.length; i++) {
+            if (val === arr[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包练习_01</title>
+</head>
+<body>
+<p>每隔1秒连续输出1-9</p>
+<script type="text/javascript">
+init();
+function init(){
+    //printNum();
+    setInterval(printNumTwo(),1000)
+}
+function printNum() {
+    for(var i = 1;i < 10;i++){
+        setTimeout(function(){
+            console.log(i)
+        },1000)
+    }
+}
+function printNumTwo() {
+    for(var i = 1;i < 10;i++){
+        (function(n){
+            document.write += n;
+            setTimeout(function(){
+
+            },1000)
+//            setInterval(function(){
+//                console.log(n)
+//            },1000)
+        })(i);
+    }
+}
+
+</script>
+</body>
+</html>

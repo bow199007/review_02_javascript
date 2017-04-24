@@ -16,7 +16,8 @@
 <div id="twoBox" style="width: 200px;height: 200px;border:2px solid green;padding:10px;margin:10px;background:palevioletred;"></div>
 <!--offset()-->
 <div class="getOffset" style="position:relative;top:40px;left:50px;"></div>
-
+<!--隐藏的div-->
+<div style="display:none;" class="hiddenDiv">这是一个隐藏的div，我要获取它的宽高</div>
 
 <script src="../jquery-3.2.0.min.js" type="text/javascript"></script>
 <script src="../zepto.min.js" type="text/javascript"></script>
@@ -24,7 +25,7 @@
 (function($){
     //DOM操作，jquery添加id不会生效
     $(function(){
-       var inSet = $('<p>Jquery</p>',
+       var inSet = $('<p>1.Jquery</p>',
            {id : 'insetId'});
        inSet.appendTo($('body'));
     });
@@ -37,7 +38,7 @@
             });
         //carryOutLoad.appendTo('.insetJquery');
         carryOutLoad.on('load', function() {
-            console.log('jQ loaded');    //未打印
+            console.log('2.jQ loaded');    //未打印
         });
     });
     //事件委托
@@ -50,10 +51,16 @@
     });
     //width() height()的区别
     var oneBox = $('#oneBox');
-    console.log(oneBox.width());    //200，不包含border，padding，margin
+    console.log('4+'+oneBox.width());    //200，不包含border，padding，margin
     //offset()的区别
     var getOffset = $('.getOffset');
-    console.log(getOffset.offset());    //top: 568, left: 58
+    console.log('5+'+getOffset.offset());    //top: 568, left: 58
+    //获取隐藏的div宽高
+    var hiddenDiv = $('.hiddenDiv');
+    console.log('6+'+hiddenDiv.height());    //21
+    //原型的extend方法
+
+
 
 
 })(window.jQuery);
@@ -62,7 +69,7 @@
 Zepto(function($){
     //DOM操作，zepto添加id生效
     $(function(){
-        var inSet = $('<p>Zepto</p>',{id : 'insetId'});
+        var inSet = $('<p>1.Zepto</p>',{id : 'insetId'});
         inSet.appendTo($('body'));
     });
     //事件触发，load会执行
@@ -74,39 +81,54 @@ Zepto(function($){
             });
         carryOutLoad.appendTo('.insetZepto');
         carryOutLoad.on('load', function() {
-            console.log('zepto loaded');
+            console.log('2+zepto loaded');
         });
     });
     //事件委托
     $(document).on('click','.c',function(){
         alert('c事件');
-        $(this).removeClass('c').addClass('d');
+        $(this).removeClass('c').addClass('d newClass');
     });
     $(document).on('click','.d',function(){
         alert('d事件');
     });
+    $(document).on('click','.newClass',function(){
+        alert('newClass事件');
+    });
     //width() height()
     var twoBox = $('#twoBox');
-    console.log(twoBox.width());    //224，包含了width，border，padding，不包含margin
-    console.log(twoBox.css('width'));   //200px，带单位的宽度值，不包含border，padding，margin
+    console.log('4.1+'+twoBox.width());    //224，包含了width，border，padding，不包含margin
+    console.log('4.2+'+twoBox.css('width'));   //200px，带单位的宽度值，不包含border，padding，margin
     //offset()的区别
     var getOffset = $('.getOffset');
     console.log(getOffset.offset());    //left: 58, top: 568, width: 1887, height: 0
+    //Zepto无法获取隐藏元素宽高，jQuery 可以
+    var hiddenDiv = $('.hiddenDiv');
+    console.log('6+'+hiddenDiv.height());    //0
+    //zepto没有原型的extend方法
+    function people(name,age){
+        this.name = name;
+        this.age = age;
+        this.newFun = function(){
+            console.log("7+extend："+ name + age);
+        }
+    }
+    var newPerson = new people('phf',28);
+    people.prototype.edu = 'college';
+    console.log("7+extend："+people.name);
+
+
 
 });
 </script>
 
 
 <!--
-7,Zepto无法获取隐藏元素宽高，jQuery 可以。
-
-　　8,Zepto中没有为原型定义extend方法而jQuery有。
-
 　　9,Zepto 的each 方法只能遍历 数组，不能遍历JSON对象。
 
 　　10,Zepto在操作dom的selected和checked属性时尽量使用prop方法，在读取属性值的情况下优先于attr。Zepto获取select元素的选中option不能用类似jQuery的方法$('option[selected]'),因为selected属性不是css的标准属性。应该使用$('option').not(function(){ return !this.selected })。
 
-　　10,Zepto不支持的选择器：
+　　11,Zepto不支持的选择器：
 -->
 </body>
 </html>
