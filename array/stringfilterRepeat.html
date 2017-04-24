@@ -9,19 +9,28 @@
 <script type="text/javascript">
     init();
     function init() {
-
+        var str1 = 'abcbdk';
+        filterRepeat(str1);
     }
 
     /**
-     * 定义一个函数
+     * （1）字符串去重，将字符串先转化为数组，
+     * （2）再对数组进行去重
+     * （3）返回新数组
+     * （4）新数组转换为字符串输出
      *
-     * @param arr 入参
+     *
+     * @param str 入参
      * @returns {Array}  定义一个空的数组，并且返回该数组
+     *
      */
     function filterRepeat(str) {
+        var emptyArr = new Array();
+        var strArr = str.split("");
+        //console.log(strArr);
+
 
     }
-
 
 
 </script>
