@@ -7,6 +7,94 @@
 <body>
 
 <script type="text/javascript">
+    /**
+     * （1）索引数组的问题
+     *  a.只有下标，不能精确表示元素的含义
+     *  b.无法精确查找元素
+     *
+     * （2）hash数组
+     * 创建：定义一个空数组，再向数组中添加元素
+     * var arr = []
+     * var arr = new Array();
+     * arr[key] = value;
+     * key必须是字符串
+     *
+     * （3）hash数组使用注意点
+     * a.关联数组中的key不能重复,
+     * b.所有数组如果访问不存在的下标位置，不会报错！会返回undefined
+     *
+     * （4）关联数组优点
+     * 快速精确查找！不需要遍历！和数据量无关！
+     */
+
+
+    /**
+     * 索引数组：
+     * 游标为0的是 'a'
+     * 游标为1的是 'b'
+     */
+    var arr = ['a', 'b'];
+
+
+    var arr1 = new Array();
+    arr1['name'] = 'phf';
+    arr1['age'] = 28;
+    arr1['name'] = 'phf2';  //  存在相同属性时，后面的值会覆盖前面的值
+
+    console.log(arr1);
+    //console.log(arr1[jack]);//Uncaught ReferenceError: jack is not defined
+    //访问不存在的下标位置，不会报错，会返回undefined
+    console.log(arr1['aa']);//undefined
+
+    console.log("----------完美的分隔符----------");
+
+    /**
+     * 遍历arr1中所有的key
+     */
+    for (var key in arr1) {
+        console.log("key：" + key);
+        console.log("value：" + arr1[key]);
+        console.log("*****")
+    }
+
+    console.log("----------完美的分隔符----------");
+
+    /**
+     * 题目1：
+     * 我输入一个终止数字N，
+     * （1）请返回从0到N间所有的偶数
+     * （2）并且返回所有奇数的和
+     *
+     * 然后将（1）和（2）的结果，通过hash数组返回
+     * （1）的key：evenArray
+     * （2）的key：oddTotalVal
+     *
+     */
+    init();
+    function init() {
+        endNum(5);
+        endNum(-1);
+        endNum('a');
+    }
+    function endNum(n) {
+        var evenArray = [];
+        var oddTotalVal = 0;
+        //判断输入的字符类型为数字，并且要大于0
+        if ((typeof n == 'number') && n > 0) {
+            for (var i = 0; i < n; i++) {
+                if (i % 2 == 0) {
+                    evenArray.push(i);
+                } else {
+                    oddTotalVal += i;
+                }
+            }
+            console.log(evenArray);
+            console.log(oddTotalVal);
+        }else{
+            console.log("n is invalid")
+        }
+    }
+
 
 </script>
 </body>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组API</title>
+</head>
+<body>
+<p>var arr1 = [1, 2, 3, 'a', 'b', 'c'];</p>
+<p>var arr2 = ['a', 'b'];</p>
+<p>var del = [1, 2, 3, 4, 5, 6];</p>
+<p>var insert = [1, 2, 3, 4, 5, 6];</p>
+<p>var replace = [1, 2, 3, 4, 5, 6];</p>
+<p>var sortArray = [6,3,5,44,22,1];</p>
+<script type="text/javascript">
+    init();
+    function init() {
+        var arr1 = [1, 2, 3, 'a', 'b', 'c'];
+        arrToString(arr1);  //（1）数组转为字符串
+        //（2）连接两个或多个数组：concat
+        var arr2 = ['a', 'b'];
+        concatArr(arr1, arr2);
+        //（3）获取子数组 slice
+        childArr(arr1);
+        //（4）删除 插入 替换 splice，然后返回被删除的项目
+        var del = [1, 2, 3, 4, 5, 6];
+        delArr(del);
+        var insert = [1, 2, 3, 4, 5, 6];
+        insertArr(insert);
+        var replace = [1, 2, 3, 4, 5, 6];
+        replaceArr(replace);
+        //（5）颠倒数组中所有元素的位置
+        reverse(arr1);
+        //（6）sort排序
+        var sortArray = [6, 3, 5, 44, 22, 1];
+        sort(sortArray);
+        sort2(sortArray);
+        sort3(sortArray);
+
+
+    }
+    function arrToString(arr) {
+        var str = arr.toString();  //1,2,3     返回数组中的元素内容，用逗号分隔
+        var str2 = arr.join("");   //123       无缝拼接数组中的元素内容，可自定义连接符
+        console.log('数组转字符串，用“，”分隔：');
+        console.log(str);
+        console.log('数组转字符串，无缝拼接：');
+        console.log(str2);
+    }
+
+    function concatArr(arr1, arr2) {
+        var newArr = arr1.concat(arr2);
+        console.log('连接数组：');
+        console.log(newArr);    //[1, 2, 3, "a", "b"]     concat不修改原数组，总是返回一个新数组
+    }
+
+    function childArr(arr) {
+        var newArr = arr.slice(0, 4);    //[1, 2, 3, "c"]
+        var newArr1 = arr.slice(-1, 4);     //[]
+        console.log('获取子数组0-4：');
+        console.log(newArr);
+        console.log('获取子数组（-1）- 4：');
+        console.log(newArr1);
+    }
+
+    function delArr(arr) {
+        var delArr = arr.splice(2, 1); //从位置2开始，删除1个元素
+        console.log('splice删除的元素：');
+        console.log(delArr);
+        console.log('返回新的数组：');
+        console.log(arr);
+    }
+    function insertArr(arr) {
+        var insetArr = arr.splice(2, 0, 'c', 'd', 'e');    //从2的位置开始，插入新值'c','d','e'
+        console.log('splice插入的元素：');
+        console.log(insetArr);
+        console.log('返回新的数组：');
+        console.log(arr);
+    }
+    function replaceArr(arr) {
+        var replaceArr = arr.splice(2, 2, 'r', 'e', 'p', 'l', 'a', 'c', 'e');  //新元素的个数和n不一定相等，数组会自动调整元素的位置和长度
+        console.log('splice替换的元素：');
+        console.log(replaceArr);
+        console.log('返回新的数组：');
+        console.log(arr);
+    }
+
+    function reverse(arr) {
+        var reverse = arr.reverse();
+        console.log('reverse颠倒数组中所有元素的位置：');
+        console.log(reverse);
+    }
+
+    function sort(arr) {
+        var sortArr = arr.sort();
+        console.log('sort对数组进行排序，默认按升序排列：');
+        console.log(sortArr);   //[1, 22, 3, 44, 5, 6]
+    }
+    /**
+     * 默认一切转为字符串，按升序排列
+     * 自定义排序，按数字大小升序排列
+     * （1）先定义一个排序函数
+     * （2）将排序函数对象作为参数传入sort方法中
+     */
+    function sort2(arr) {
+        var sortArr = arr.sort(sortNum);
+        console.log('sort自定义排序，按大小升序排列：');
+        console.log(sortArr);   //[1, 3, 5, 6, 22, 44]
+    }
+    function sortNum(a, b) {
+        return a - b;
+    }
+    /**
+     * 自定义排序，按降序排列
+     * 给比较器的逻辑*-1
+     * @param arr
+     */
+    function sort3(arr) {
+        var sortArr = arr.sort(sortNumDown);
+        console.log('sort自定义排序，按大小降序排列：');
+        console.log(sortArr);   //[44, 22, 6, 5, 3, 1]
+    }
+    function sortNumDown(a, b) {
+        return (a - b) * (-1);
+    }
+
+    /**
+     * 结尾出入栈
+     */
+    var bottomStack = new Array();
+    //入栈 push
+    for (var i = 1; i <= 10; i++) {
+        bottomStack.push(i);
+    }
+    console.log(bottomStack);
+
+    //出栈 pop
+    //如果使用栈的时候，length的实时发生变化的
+    //for(var i = 1; i < bottomStack.length; i++) {
+    for (var i = 1; i <= 10; i++) {
+        console.log("出栈：" + bottomStack.pop());
+        console.log("当前栈：" + bottomStack.toString());
+        console.log("_____");
+    }
+
+    /**
+     * 开头出入栈
+     */
+        //入栈 unshift
+    var headStack = [];
+    for (var i = 1; i <= 10; i++) {
+        headStack.unshift(i)
+    }
+    console.log(headStack);
+
+    //出栈 shift
+    for (var i = 1; i <= 10; i++) {
+        console.log("开头出栈：" + headStack.shift());
+        console.log("当前栈：" + headStack.toString());
+        console.log("*****")
+    }
+
+    /**
+     * 队列：只能从一端进入，从另一端出去
+     */
+        //进：push
+    var lineArr = [];
+    for (var i = 1; i <= 10; i++) {
+        lineArr.push(i);
+    }
+    console.log(lineArr);
+    //出：shift
+    for (var i = 1; i <= 10; i++) {
+        console.log("队列：" + lineArr.shift());
+        console.log("当前队列：" + lineArr.toString());
+        console.log("*****")
+    }
+
+
+</script>
+</body>
+</html>

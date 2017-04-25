@@ -9,8 +9,8 @@
 <script type="text/javascript">
     init();
     function init() {
-        var str1 = 'abcbdk';
-        filterRepeat(str1);
+        var str1 = 'abb1212';
+        console.log(filterRepeat(str1));
     }
 
     /**
@@ -25,11 +25,29 @@
      *
      */
     function filterRepeat(str) {
-        var emptyArr = new Array();
-        var strArr = str.split("");
+        var strArr = str.split(""); //将str字符串转换为数组
         //console.log(strArr);
+        var emptyArr = [];
+        //循环比较数组
+        for (var i = 0; i < strArr.length; i++) {
+            //定义一个新的函数，判断比较值为true/false
+            if (!isEixst(strArr[i], emptyArr)) {
+                emptyArr.push(strArr[i]);
+            }
+        }
+        //将数组拼接成字符串
+        //var myStr = emptyArr.toString();    //返回的字符串用','分隔
+        var myStr = emptyArr.join("");
+        return myStr;
+    }
 
-
+    function isEixst(arr, nArr) {    //第一个参数为原数组，第二个参数为push的新数组
+        for (var i = 0; i < nArr.length; i++) {
+            if (arr === nArr[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
