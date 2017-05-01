@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二维数组</title>
+</head>
+<body>
+<script type="text/javascript">
+    init();
+    function init() {
+        var arr1 = [1, 2, 3, 4];
+        var arr2 = ['a', 'b', 'c', 'd'];
+        tArr(arr1, arr2);
+
+        //冒泡排序
+        var arrBug = [34, 56, 1, 2, 45]
+        bubble(arrBug, compare);
+        console.log(arrBug);
+    }
+    /**
+     * 创建一个二维数组 ?
+     * @type {Array}
+     */
+    function tArr(arrOne, arrTwo) {
+        var tArray = new Array();  //先声明一维
+        for (var k = 0; k < arrOne.length; k++) {    //一维长度为i（这里写 5 作为例子）,i为变量，可以根据实际情况改变
+            tArray[k] = new Array();  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+            for (var j = 0; j < arrTwo.length; j++) {   //一维数组里面每个元素数组可以包含的数量p（也就是这里的 5 ），p也是一个变量；
+                tArray[k][j] = ''; //这里将变量初始化，我这边统一初始化为空，后面再用所需的值覆盖里面的值
+            }
+        }
+        console.log("当前数组：" + tArray);
+        console.log('-----完美的分隔符-----');
+        /**
+         * 遍历数组
+         */
+        for (var r = 0; r < tArray.length; r++) {
+            for (var c = 0; c < tArray[r].length; c++) {
+                console.log("当前元素：" + tArray[r][c]);
+                console.log('*****');
+            }
+        }
+    }
+
+    /**
+     * 冒泡排序法
+     * @param arr 数组
+     * @param compare 比较函数
+     */
+    function bubble(arr, compare) {
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < arr.length - i; j++) {
+                if (compare(arr[j], arr[j + 1]) > 0) {
+                    var temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;    //位置调换
+                }
+            }
+        }
+    }
+    function compare(a, b) {
+        return parseFloat(a) - parseFloat(b); //按升序排列
+        //return (parseFloat(a) - parseFloat(b)) * (-1);  //按降序排列
+    }
+
+
+</script>
+</body>
+</html>

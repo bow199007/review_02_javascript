@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /**
+     * 题目：
+     * array.toString()
+     * array.join()
+     *
+     * 请实现一个功能，将字符串中的【，】全部替换成【*】，执行完成之后，
+     * （1）替换后的字符串
+     * （2）返回被替换【，】的个数
+     * （3）返回【，】出现的位置
+     *
+     * 使用hash数组返回，
+     * （1）KEY:replacedStr
+     * （2）KEY:replaceAmount
+     * （3）KEY:replacedIndex
+     *
+     *
+     * 举例
+     * var a = "12,3,4,567";
+     * 返回结果：
+     * arr["replacedStr"] = "12*3*4*567";
+     * arr["replaceAmount"] = 3;
+     * arr["replacedIndex"] = [2,4,6];
+     *
+     */
+
+    _parseString("12,3,4,567");
+    function _parseString(str) {
+        var rtn = new Array();
+
+        var newStrArr = new Array();
+        var amount = 0;
+        var indexArr = new Array();
+
+        var strArr = str.split(""); //将字符串转换为数组
+        for (var i = 0; i < strArr.length; i++) {
+            if (strArr[i] == ",") {
+                newStrArr.push("*");
+                amount++;   //逗号的个数
+                indexArr.push(i);   //所替换的位置
+            } else {
+                newStrArr.push(strArr[i]);
+            }
+        }
+        /**
+         * hash数组的形式输出
+         * @type {string}
+         */
+        rtn["replacedStr"] = newStrArr.join("");    //替换后的字符串
+        rtn["replaceAmount"] = amount;
+        rtn["replacedIndex"] = indexArr;
+
+        console.log(rtn);
+        return rtn;
+    }
+</script>
+
+</body>
+</html>

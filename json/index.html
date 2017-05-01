@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /**
+     * 题目：
+     *
+     * 复习一下 JSON对象 和 JSON对象数组 ，JSON字符串，JSON数组字符串
+     *
+     * 定义一个JSON对象变量
+     * 定义一个JSON对象数组
+     * 定义一个JSON字符串
+     * 定义一个JSON数组字符串
+     *
+     * JSON对象如何转换为JSON字符串
+     * JSON字符串转换为JSON对象
+     */
+
+    // json对象
+    var jsonObj = {name: 'phf', age: 28};
+    console.log("jsonObj:" + jsonObj);
+
+    // json对象----->json字符串
+    var jsonStr = JSON.stringify(jsonObj);
+    console.log("jsonStr:" + jsonStr);
+
+    // json字符串
+    var jsonStr2 = "{\"name\":\"phf\",\"age\":\"28\"}";
+    var jsonStr3 = '{"name":"phf","age":"28"}';
+    console.log("jsonStr2:" + jsonStr2);
+    console.log("jsonStr3:" + jsonStr3);
+
+    // json字符串----->json对象
+    var jsonObj2 = JSON.parse(jsonStr2);
+    var jsonObj3 = JSON.parse(jsonStr3);
+    console.log("jsonObj2:" + jsonObj2);
+    console.log("jsonObj3:" + jsonObj3);
+
+    // json数组
+    var jsonObjArr = [{name: 'phf', age: 28}, {name: 'phf', age: 28}];
+
+    // json数组----->json数组字符串
+    var jsonObjArrStr = JSON.stringify(jsonObjArr);
+    console.log("jsonObjArrStr:" + jsonObjArrStr);
+
+    // json数组字符串
+    var jsonObjArrStr1 = '[{"name": "phf", "age": "28"}]';
+    console.log("jsonObjArrStr1:" + jsonObjArrStr1);
+
+    // json数组字符串----->json数组
+    var jsonObjArr1 = JSON.parse(jsonObjArrStr1);
+    console.log("jsonObjArr1:" + jsonObjArr1);
+
+
+
+</script>
+</body>
+</html>

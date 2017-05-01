@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串对象</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /**
+     * 字符串对象
+     * 多个字符组成的只读*数组*
+     * （1）访问任意一个字符 str[i]
+     *  凡是不直接修改原数组的API，字符串都能用
+     * （2）concat()：连接
+     * （3）slice(startIndex,endIndex)：获取子数组
+     *
+     */
+
+    /**
+     * 题目：
+     * 实现如下功能，将字符串的2~4位替换为*，并且将原来的内容追加到新的字符串结尾，连接符[,]
+     *
+     * 比如：
+     * abc123
+     * 执行之后
+     * ab***3,c12
+     *
+     */
+    init();
+    function init() {
+        var str1 = 'abc123';
+        var str2 = '1123344546556'
+        stringObj(str1);
+        stringObj(str2);
+    }
+
+    function stringObj(str) {
+        var allStr = '';    //最终将要存入
+        var replaceStr = str.substr(2, 3);
+        console.log(replaceStr);    //截取到2-4的字符串
+        for (var i = 0; i < str.length; i++) {
+            if (i >= 2 && i <= 4) {
+                allStr += '*';
+            } else {
+                allStr += str[i];
+            }
+        }
+        allStr += (',' + replaceStr);
+
+        console.log(allStr);
+        return allStr;
+
+    }
+
+
+</script>
+
+</body>
+</html>

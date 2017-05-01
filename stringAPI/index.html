@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>string API</title>
+</head>
+<body>
+<script type="text/javascript">
+    /**
+     * （1）大小写转换
+     * （2）获取指定位置的字符或unicode
+     * （3）查找关键字的位置
+     * （4）获取子字符串
+     *
+     */
+    init();
+    function init() {
+        var str1 = 'Hello World!';
+        lower(str1);
+        upper(str1);
+        char(str1);
+        //检索关键字 indexOf
+        findKeyword(str1, 'H');  // -1，H位置在0，检索从1开始的
+        findKeyword(str1, 'e');  // 1
+        findKeyword(str1, 'hello');  // -1
+        findKeyword(str1, 'World');  // 6
+        //lastIndexOf
+        findLastKeyword(str1, 'H');  //0
+        findLastKeyword(str1, 'e');  //1
+        findLastKeyword(str1, 'World');  //-1
+        //获取子字符
+        getChild(str1);
+
+    }
+    //全部转换成小写
+    function lower(str) {
+        var newStr = str.toLowerCase();
+        console.log(newStr);
+    }
+    //全部转换成大写
+    function upper(str) {
+        var newStr = str.toUpperCase();
+        console.log(newStr);
+        console.log('----------完美的分隔符----------');
+    }
+    //获取指定位置的字符
+    function char(str) {
+        console.log('位置在4的字符：' + str.charAt(4));
+        console.log('位置在8的字符：' + str[8]);
+        var unicode = str.charCodeAt(8);
+        console.log('位置在8的unicode：' + unicode);
+        console.log('----------完美的分隔符----------');
+    }
+    /**
+     * 查找关键字的位置
+     * 返回的都是关键字的位置下标
+     */
+    function findKeyword(str, keyWord) {
+        var i = str.indexOf(keyWord, 1);    //省略位置，则从0开始
+        console.log(i);
+    }
+    function findLastKeyword(str, keyWord) {
+        var i = str.lastIndexOf(keyWord, 1);    //省略位置，则从0开始
+        console.log(i);
+    }
+
+    /**
+     * 获取子字符串
+     * var sub=str.slice(starti,endi+1);
+     * str.substring(starti,endi+1); //不支持负数参数
+     * str.substr(starti,n);
+     *
+     */
+    function getChild(str) {
+        var sub1 = str.slice(2, 4);
+        var sub2 = str.substring(2, 4);
+        var sub3 = str.substr(2, 3);
+        console.log('sub1：' + sub1);
+        console.log('sub2：' + sub2);
+        console.log('sub3：' + sub3);
+    }
+
+
+</script>
+</body>
+</html>
