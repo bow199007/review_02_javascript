@@ -67,7 +67,7 @@
 
     init();
     function init() {
-        phoneNum();
+        //phoneNum();
         IDcard();
     }
     /**
@@ -117,10 +117,11 @@
      */
 
     function IDcard() {
-        var cardNum = new RegExp(/^\d{15}(\d\d[0-9Xx])?$/);
+        var cardNum = new RegExp(/^\d{15}(\d\d(\d|[Xx]))?$/);
         console.log(cardNum.test("3209111999"));
-        console.log(cardNum.test("320911199911202736"));    //15位
-        console.log(cardNum.test("32091119991120273612x"));    //18位    false?
+        console.log(cardNum.test("320911199911202"));    //15位
+        console.log(cardNum.test("320911198805212211"));    //18位    true
+        console.log(cardNum.test("32091119991120222X"));    //18位    true
     }
 
 
