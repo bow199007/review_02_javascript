@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>验证JSONP</title>
+<style>
+    .aClass {
+        border: 1px solid red;
+    }
+</style>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap-table.css">
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap-table.js"></script>
+<script src="ga.js"></script>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    $.ajax({
+        type : "get",
+        async: true,    //默认值true，异步方式
+        url : "http://192.168.1.8:7001/list",
+        dataType : "jsonp", //处理跨域
+        jsonp:'callback',   //服务器端获取回调函数名的key，对应后台有$_GET['callback']='getName';callback是默认值
+        jsonpCallback:'getName',    //回调函数名
+        success : function(aa){
+            //m1(aa);
+            m2(aa);
+        },
+        error:function(){
+            alert('fail');
+        }
+    });
+});
+
+function m2(jsonArr){
+    alert(jsonArr);
+    $('#myTable').bootstrapTable({
+        data: jsonArr
+    });
+}
+
+/**
+功能：将json数组转换成表格展现
+入参：json对象数组
+出参：无
+*/
+function m1(json) {
+    //获取的数据是个json数组
+    var tableStr = "<table class = 'aClass'>";
+    for(var i = 0 ; i < json.length; i++) {
+        tableStr += "<tr>";
+        tableStr += "<td>" +json[i].id +"</td>" ;
+        tableStr += "<td>" +json[i].name +"</td>" ;
+        tableStr += "<td>" +json[i].age +"</td>" ;
+        tableStr += "</tr>";
+    }
+    tableStr += "</table>";
+    $("body").html(tableStr);
+}
+
+</script>
+</head>
+<body>
+    <table id="myTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name">name</th>
+                <th data-field="age">age</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>

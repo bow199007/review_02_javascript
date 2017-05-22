@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+    <script src="../jquery-3.2.0.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    /**
+     * （1）对象是什么？
+     * 程序中描述一个现实中具体事物的属性和方法的结构
+     * 比如汽车是一个对象，车的品牌，颜色就是属性
+     * 启动，停止，加速，双闪，刹车都是车子的方法
+     *
+     * （2）面向对象的编程（Object Oriented Programming）
+     * 面向对象编程中，描述一个具体事物都需要用对象来封装对象的属性和方法
+     * 比如：rest软件架构中，都是按照对象的模块进行划分，比如人员管理，资源管理
+     * /user/list
+     * /user/1111
+     *
+     * （3）创建一个对象
+     * （a）json对象
+     * var obj = {"属性名":"值","属性名":"值",...};
+     * （b）new Object() === {}
+     * （c）定义function
+     *
+     * （4）封装：将描述一个事物的属性和方法集中定义在一个对象中。
+     *  为什么：
+     *  1. 单独的属性和方法是没有意义的，只有放在对象上才有意义。
+     *  2. 便于反复调用——代码重用！便于维护！请参考Car
+     *
+     * （5）使用jquery读取json文件
+     *
+     * （6）对象的多态：同一个东西在不同情况下，表现不同的状态。
+     * （包括重载和重写）
+     * TODO:重载和重写
+     *
+     */
+
+
+    init();
+    function init() {
+        var obj = {name: 'panhf', age: 28};
+        // hash数组，传入的key必须是字符串
+        console.log(obj["name"]);
+        console.log(obj["age"]);
+
+        // in
+        for (var key in obj) {
+            console.log(key + ":" + obj[key]);
+        }
+
+
+        var obj1 = new Object();
+        obj1.name = "zjl";
+        obj1["age"] = 4;
+        // 将对象转换成字符串
+        console.log(JSON.stringify(obj1));
+
+        var car = new Car("white", "buick");
+        var car2 = new Car("black", "benz");
+
+        console.log(JSON.stringify(car));
+        car.launch();
+        car.stop();
+        // 原型的使用
+        Car.prototype.info = function () {
+            console.log(JSON.stringify(this));
+        };
+
+        console.log("=====");
+        car.info();
+        car2.info();
+
+        console.log("=====");
+        /**
+         *
+         * 使用jquery加载json文件
+         */
+        var dataroot = "../json/test.json";
+        var carArr = new Array();
+        /**
+         * 异步执行
+         * http://www.cnblogs.com/chenxizhang/archive/2009/07/02/1515151.html
+         *
+         */
+        $.getJSON(dataroot, {}, function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                var car = new Car(data[i].color, data[i]["brand"]);
+                carArr.push(car);
+            }
+
+            //console.log(JSON.stringify(carArr));
+        });
+
+        console.log("=====");
+        console.log(new Person("phf"));
+        console.log(new Person("phf", 28));
+
+    }
+
+    function Person() {
+        /**
+         * 参数列表封装在arguments内置对象数组中
+         */
+        console.log(JSON.stringify(arguments));
+    }
+
+    function Car(color, brand) {
+
+        this.color = color;
+        this.brand = brand;
+
+        this.launch = function () {
+            console.log("car is launch");
+        };
+
+        this.stop = function () {
+            console.log("car is stop");
+        }
+    }
+
+    function Car(color, brand, createDate) {
+        this.color = color;
+        this.brand = brand;
+        this.createDate = createDate;
+
+        this.launch = function () {
+            console.log("car is launch");
+        };
+
+        this.stop = function () {
+            console.log("car is stop");
+        }
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    /**
+     * 修改继承的方法
+     * （1）仅修改一个对象的父对象
+     * （2）替换构造函数的原型对象(prototype)，为新父对象
+     * （3）用一个已有的父对象作为参照，创建一个新子对象，同时，扩展子对象自有属性
+     */
+    var father = {balance: 100, car: "=B="};
+    var son = Object.create(father, {//修改继承方法三,用一个已有的父对象作为参照，创建一个新子对象，同时，扩展子对象自有属性
+        favorite: {value: "坑爹"/*,writable:true*/}
+    });
+    console.log(son.balance);//100
+    console.log(son.favorite);//坑爹
+    console.log(son.hasOwnProperty("favorite"));//true//自由属性
+    son.favorite = "飙车";
+    console.log(son.favorite);//坑爹
+
+    function Student(sname, sage) {//this-->刚创建的空对象
+        this.sname = sname;
+        this.sage = sage;
+    }//prototype-->Student.prototype
+    Student.prototype = father;             //(1)修改继承方法二
+    Student.prototype.constructor = Student;//(2)修改继承方法二
+    //prototype-->father
+    //凡是子对象共有的属性值和方法，都要放在构造函数的原型中
+    Student.prototype.intrSelf = function () {
+        console.log("I'm " + this.sname + ",I'm " + this.sage);
+    }//prototype.intrSelf
+     //father.intrSelf
+
+    var lilei = new Student("Li Lei", 18);
+    var hmm = new Student("Han Meimei", 19);
+
+
+    /*仅修改一个子对象的父对象*/
+    //hmm.__proto__=father;             //(1)修改继承方法一
+    //Object.setPrototypeOf(hmm,father);//(2)修改继承方法一
+    console.log(hmm.balance); //100
+    console.log(lilei.balance);//100
+    lilei.intrSelf();//I'm Li Lei,I'm 18
+    hmm.intrSelf();//I'm Han Meimei,I'm 19
+</script>
+
+<script type="text/javascript">
+    /**
+     * 修改继承的方法
+     * 用于两种类型间的继承
+     */
+    //定义所有飞行物类型的构造函数
+    function Flyer(fname, speed) {
+        this.fname = fname;
+        this.speed = speed;
+    }
+
+    Flyer.prototype.fly = function () {//所有飞行物都能飞行
+        console.log(this.fname + " 以 " + this.speed + " 时速飞行");
+    };
+
+    var bird = new Flyer("小麻雀", 60);
+    bird.fly();//小麻雀 以 60 时速飞行
+
+    /*定义飞机类型的构造函数：名称，速度，载客数*/
+    function Plane(fname, speed, capacity) {
+        Flyer.call(this, fname, speed);//——借用构造函数
+//        this.fname = fname;
+//        this.speed = speed;
+        this.capacity = capacity;
+    }
+
+    //Plane.prototype 继承 Flyer.prototype
+    Object.setPrototypeOf(Plane.prototype, Flyer.prototype);
+
+    var A380 = new Plane("A380", 1000, 555);
+    A380.fly();
+
+    Plane.prototype.fly = function () {
+        console.log(this.fname + " 搭载 " +
+            this.capacity + " 名乘客以 " +
+            this.speed + " 时速飞行");
+    }
+
+    A380.fly();//A380 搭载 555 名乘客以 1000 时速飞行
+</script>
+</body>
+</html>
+
+
