@@ -5,6 +5,41 @@
     <title>闭包</title>
 </head>
 <body>
+<script type="text/javascript">
+    /*定义一个函数，模拟取号机:
+     每次取一个数
+     数是连续不重复的
+     */
+    //定义工厂函数保护局部变量
+    function factory(){
+        var n=0;//受保护的局部变量
+        return function(){ return ++n; }
+    }
+    //获得返回的内部函数对象
+    var ccb=factory();//外层函数调用第一次
+    //ccb:function(){ return ++n; }
+    //使用内部函数对象操作受保护的变量
+    console.log(ccb());//1
+    console.log(ccb());//2
+    n=1;
+    console.log(ccb());//3
+    console.log("----------");
 
+    var icbc=factory();//外层函数调用第二次
+    console.log(icbc());//1
+    console.log(icbc());//2
+    console.log("----------");
+    /*笔试题*/
+    function outer(){
+        for(var i=0,arr=[];i<3;i++){//i受保护的变量
+            arr[i]=function(){return i};
+        }//i变成了3
+        return arr;
+    }
+    var funs=outer(); //外层函数调用一次，只有1个i
+    console.log(funs[0]()); //3
+    console.log(funs[1]()); //3
+    console.log(funs[2]()); //3
+</script>
 </body>
 </html>
